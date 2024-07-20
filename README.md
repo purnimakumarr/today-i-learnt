@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Today I Learnt
+"Today I Learnt" is an interactive web application designed for curious minds to share and discover new facts daily. Users can add their own facts along with the source, and others can vote on these facts as interesting, mind-blowing, or false. If a fact receives conflicting votes, it is marked with a "disputed" label, promoting a community-driven fact-checking process.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-## Available Scripts
+### Prerequisites
 
-In the project directory, you can run:
+- [Node.js](https://nodejs.org/) (version 18.12.0)
+- [npm](https://www.npmjs.com/) (version 8.19.2)
 
-### `npm start`
+### Clone the Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Install Dependencies
 
-### `npm test`
+Using npm:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Running the Application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To start the application, use the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+### Running in Development Mode
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+For development mode with live reloading:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Take a Look
+![Application Demo](./img/app-demo.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Configuration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Environment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project uses environment variables for configuration. Create a `.env` file in the root of your project and add the following variables:
 
-### Code Splitting
+```plaintext
+SUPABASE_KEY=your-supabase-key
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Example `.env` File
 
-### Analyzing the Bundle Size
+```plaintext
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Supabase Key
+SUPABASE_KEY=your-supabase-key
+```
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Author
+Purnima Kumar
