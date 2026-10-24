@@ -24,14 +24,14 @@ Tidbit is a small social web app for sharing interesting facts. Post a fact with
 
 ## Tech stack
 
-| Area      | Choice                                                                |
-| --------- | --------------------------------------------------------------------- |
-| UI        | React 18 with function components and hooks                           |
-| Language  | TypeScript (strict)                                                   |
-| Build     | Vite                                                                  |
-| Backend   | Supabase (Postgres + auto-generated REST API) via `@supabase/supabase-js` |
-| Styling   | Plain CSS with design tokens (custom properties); no UI framework     |
-| Quality   | ESLint (typescript-eslint, react-hooks)                               |
+| Area     | Choice                                                                    |
+| -------- | ------------------------------------------------------------------------- |
+| UI       | React 18 with function components and hooks                               |
+| Language | TypeScript (strict)                                                       |
+| Build    | Vite                                                                      |
+| Backend  | Supabase (Postgres + auto-generated REST API) via `@supabase/supabase-js` |
+| Styling  | Plain CSS with design tokens (custom properties); no UI framework         |
+| Quality  | ESLint (typescript-eslint, react-hooks)                                   |
 
 ## Project structure
 
@@ -93,29 +93,19 @@ src/
    npm run dev
    ```
 
-| Script              | What it does                         |
-| ------------------- | ------------------------------------ |
+| Script              | What it does                          |
+| ------------------- | ------------------------------------- |
 | `npm run dev`       | Start Vite dev server with hot reload |
-| `npm run build`     | Type-check and build to `dist/`      |
-| `npm run preview`   | Serve the production build locally   |
-| `npm run lint`      | Run ESLint                           |
-| `npm run typecheck` | Run the TypeScript compiler only     |
+| `npm run build`     | Type-check and build to `dist/`       |
+| `npm run preview`   | Serve the production build locally    |
+| `npm run lint`      | Run ESLint                            |
+| `npm run typecheck` | Run the TypeScript compiler only      |
 
 ## Design notes
 
-- **Logo.** A speech bubble (sharing) with a bite taken out of the corner (a *tidbit*) and a spark for the "did you know?" moment. It's a hand-written SVG that takes its color from the theme.
+- **Logo.** A speech bubble (sharing) with a bite taken out of the corner (a _tidbit_) and a spark for the "did you know?" moment. It's a hand-written SVG that takes its color from the theme.
 - **Theme.** Warm cream and tangerine in light mode, warm charcoal in dark mode. Fonts are Bricolage Grotesque for headings and DM Sans for body text. Category colors are mixed into tinted chips with `color-mix()`, so they stay readable in both themes.
 - **One vote per fact** is enforced in the browser, which stops casual repeat voting. A production version would enforce it on the server, for example with Supabase Auth and a `votes` table keyed by user. Increments would also move into a Postgres function so concurrent votes can't overwrite each other.
-
-## Background
-
-Tidbit started as the "Today I Learned" project from a JavaScript and React course, and I've since rebuilt it as my own app:
-
-- Migrated from Create React App to **Vite** and converted the codebase to **TypeScript**.
-- Split a single 240-line component file into focused components, custom hooks and a typed data layer.
-- Designed a new brand: name, logo, color system, typography and responsive layout with dark mode.
-- Added sorting, search, one-vote-per-fact with optimistic updates, sharing, inline validation, toasts, skeleton loading and accessibility improvements.
-- Fixed bugs from the original: the form stayed disabled after posting, unknown categories crashed the page, votes could be spammed, and external links were missing `rel="noopener"`.
 
 ## Author
 
