@@ -13,6 +13,8 @@ export type NewFact = Pick<Fact, 'text' | 'source' | 'category'>;
 
 export type VoteColumn = 'votesInteresting' | 'votesMindblowing' | 'votesFalse';
 
+export type SortOption = 'top' | 'newest' | 'mindblowing';
+
 export interface Category {
   name: string;
   color: string;
