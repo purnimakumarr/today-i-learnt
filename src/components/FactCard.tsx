@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getCategory } from '../lib/categories';
+import { categoryStyle, getCategory } from '../lib/categories';
 import type { Fact, VoteColumn } from '../types';
 
 interface FactCardProps {
@@ -7,9 +7,16 @@ interface FactCardProps {
   onVote: (fact: Fact, column: VoteColumn) => Promise<void>;
 }
 
+const VOTES: { column: VoteColumn; emoji: string; label: string }[] = [
+  { column: 'votesInteresting', emoji: '👍', label: 'Interesting' },
+  { column: 'votesMindblowing', emoji: '🤯', label: 'Mind-blowing' },
+  { column: 'votesFalse', emoji: '⛔️', label: 'False' },
+];
+
 function FactCard({ fact, onVote }: FactCardProps) {
   const [isUpdating, setIsUpdating] = useState(false);
   const isDisputed = fact.votesInteresting + fact.votesMindblowing < fact.votesFalse;
+  const category = getCategory(fact.category);
 
   async function handleVote(column: VoteColumn) {
     setIsUpdating(true);
@@ -21,27 +28,32 @@ function FactCard({ fact, onVote }: FactCardProps) {
   }
 
   return (
-    <li className="fact">
-      <p>
-        {isDisputed && <span className="disputed">[😡 DISPUTED]</span>}
-        {fact.text}
-        <a className="source" href={fact.source} target="_blank" rel="noopener noreferrer">
-          (Source)
+    <li className="fact-card">
+      {isDisputed && <span className="badge badge--disputed">Disputed</span>}
+      <p className="fact-card__text">{fact.text}</p>
+
+      <div className="fact-card__footer">
+        <span className="chip" style={categoryStyle(category.color)}>
+          {category.name}
+        </span>
+        <a className="fact-card__source" href={fact.source} target="_blank" rel="noopener noreferrer">
+          Source ↗
         </a>
-      </p>
-      <span className="tag" style={{ backgroundColor: getCategory(fact.category).color }}>
-        {fact.category}
-      </span>
-      <div className="vote-buttons">
-        <button onClick={() => handleVote('votesInteresting')} disabled={isUpdating}>
-          👍 {fact.votesInteresting}
-        </button>
-        <button onClick={() => handleVote('votesMindblowing')} disabled={isUpdating}>
-          🤯 {fact.votesMindblowing}
-        </button>
-        <button onClick={() => handleVote('votesFalse')} disabled={isUpdating}>
-          ⛔️ {fact.votesFalse}
-        </button>
+
+        <div className="votes">
+          {VOTES.map(({ column, emoji, label }) => (
+            <button
+              key={column}
+              className="vote"
+              onClick={() => handleVote(column)}
+              disabled={isUpdating}
+              aria-label={`${label}: ${fact[column]} votes`}
+              title={label}
+            >
+              <span aria-hidden="true">{emoji}</span> {fact[column]}
+            </button>
+          ))}
+        </div>
       </div>
     </li>
   );

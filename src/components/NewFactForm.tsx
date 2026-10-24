@@ -15,15 +15,15 @@ function NewFactForm({ onSubmit, onDone }: NewFactFormProps) {
   const [source, setSource] = useState('');
   const [category, setCategory] = useState('');
   const [isUploading, setIsUploading] = useState(false);
-  const textLength = text.length;
+  const remaining = MAX_LENGTH - text.length;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!text || !isValidHttpUrl(source) || !category || textLength > MAX_LENGTH) return;
+    if (!text.trim() || !isValidHttpUrl(source) || !category || remaining < 0) return;
 
     setIsUploading(true);
     try {
-      await onSubmit({ text, source, category });
+      await onSubmit({ text: text.trim(), source, category });
       onDone();
     } finally {
       setIsUploading(false);
@@ -31,32 +31,47 @@ function NewFactForm({ onSubmit, onDone }: NewFactFormProps) {
   }
 
   return (
-    <form className="fact-form" onSubmit={handleSubmit}>
-      <input
-        disabled={isUploading}
-        type="text"
-        placeholder="Share a fact with the world..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <span>{MAX_LENGTH - textLength}</span>
-      <input
-        disabled={isUploading}
-        type="text"
-        placeholder="Trustworthy source..."
-        value={source}
-        onChange={(e) => setSource(e.target.value)}
-      />
-      <select disabled={isUploading} value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value="">Choose category:</option>
-        {CATEGORIES.map((cat) => (
-          <option key={cat.name} value={cat.name}>
-            {cat.name.toUpperCase()}
-          </option>
-        ))}
-      </select>
-      <button className="btn btn-large" disabled={isUploading}>
-        Post
+    <form id="new-fact-form" className="fact-form" onSubmit={handleSubmit}>
+      <div className="field field--text">
+        <label htmlFor="fact-text">Your tidbit</label>
+        <textarea
+          id="fact-text"
+          rows={2}
+          disabled={isUploading}
+          placeholder="Did you know that…"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <span className="field__counter">{remaining}</span>
+      </div>
+
+      <div className="field">
+        <label htmlFor="fact-source">Source</label>
+        <input
+          id="fact-source"
+          type="url"
+          inputMode="url"
+          disabled={isUploading}
+          placeholder="https://…"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+        />
+      </div>
+
+      <div className="field">
+        <label htmlFor="fact-category">Category</label>
+        <select id="fact-category" disabled={isUploading} value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Choose…</option>
+          {CATEGORIES.map((cat) => (
+            <option key={cat.name} value={cat.name}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button className="btn btn--primary fact-form__submit" disabled={isUploading}>
+        {isUploading ? 'Posting…' : 'Post'}
       </button>
     </form>
   );

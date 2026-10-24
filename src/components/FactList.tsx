@@ -8,17 +8,19 @@ interface FactListProps {
 
 function FactList({ facts, onVote }: FactListProps) {
   if (facts.length === 0) {
-    return <p className="message">No facts for this category yet! Create the first one ✌️</p>;
+    return <p className="message">No tidbits in this category yet. Be the first to share one!</p>;
   }
 
   return (
-    <section>
-      <ul className="facts-list">
+    <section aria-label="Facts">
+      <ul className="fact-list">
         {facts.map((fact) => (
           <FactCard key={fact.id} fact={fact} onVote={onVote} />
         ))}
       </ul>
-      <p>There are {facts.length} facts in the database. Add your own!</p>
+      <p className="fact-count">
+        {facts.length} {facts.length === 1 ? 'tidbit' : 'tidbits'} so far. Add your own!
+      </p>
     </section>
   );
 }
